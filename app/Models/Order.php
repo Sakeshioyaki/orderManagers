@@ -12,8 +12,8 @@ class Order extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'firstName',
-        'lastName',
+        'first_name',
+        'last_name',
         'address',
         'total',
         'created_at'

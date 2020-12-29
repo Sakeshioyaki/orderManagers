@@ -3,42 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderDetail;
+
 
 class OrderController extends Controller
 {
     public function order(Request $request){
-		return response()->json(['key'=>$request->all()]);
-		$orders = json_decode($request);
-		$user_id = $request->userId;
-		$current_user = User::find($user_id);
-		$order = DB::table('orders')->insert([
-			['user_id' => $request->get('userId')],
-			['address' => $request->get('address')],
-			['firstName' => $request->get('firstName')],
-			['lastName' => $request->get('lastName')],
-			['status' => 1],
+
+		$order = Order::create([
+			'user_id' => $request->get('userId'),
+			'address' => $request->get('address'),
+			'first_name' => $request->get('firstName'),
+			'last_name' => $request->get('lastName'),
+			'status' => 1,
+			'total' => 0
 		]);
-		// $order->user_id = $request->get('userId');
-		// $order->address = $request->get('address');
-		// $order->firstName = $request->get('firstName');
-		// $order->lastName = $request->get('lastName');
-		// $order->status = 1;
-		// $order->save();
-		foreach ($orders->cart as $iteam){
-			$order = DB::table('order_details')->insert([
-			['order_id' => $request->get('id')],
-			['name_product' => $request->get('name')],
-			['amount' => $request->get('amount')],
-			['quantity' => $request->get('quantity')],
-		]);
+		
+		foreach ($request->get('items') as $item){
+			OrderDetail::create([
+				'order_id' => $order->id,
+				'name_product' => $item['name'],
+				'amount' => $item['amount'],
+				// 'quantity' => $item['quantity'],
+			]);
+
 		}
-   // return response()->json(['status'=>"OK"]);
+   		return response()->json(['status'=>"OK"]);
 
 	}
 
 
-	public function getListOrder(){
-		$orders = Order::all();
-        return response()->json(['status'=> $orders]);
+	public function getListOrder(Request $request){
+		$orders = Order::where('user_id', $request->get('userId'))->get();
+		if(count($orders) <= 0) {
+			return response()->json(['status' => false]);
+		}
+        return response()->json(['status'=> true, 'order' => $orders]);
 	}
 }

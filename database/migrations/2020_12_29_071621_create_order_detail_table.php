@@ -19,7 +19,7 @@ class CreateOrderDetailTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->string('name_product');
             $table->string('amount');
-            $table->tinyInteger('quantity');
+            $table->tinyInteger('quantity')->nullable();
         });
     }
 
