@@ -18,5 +18,7 @@ use App\Http\Controllers\OrderController;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('/order_detail','App\Http\Controllers\OrderController@orderDetail');
+
 // Route::post('order', 'app/Http/Controllers/OrderController@order');
 // Route::get('listOrder', 'app/Http/Controllers/OrderController@getListOrder');

@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->integer('total')->nullable();
             $table->tinyInteger('status')->nullable();
+            $table->date('created_at');
         });
     }
 

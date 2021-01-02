@@ -17,5 +17,6 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::post('order', 'App\Http\Controllers\OrderController@order');
-Route::get('listOrder', 'App\Http\Controllers\OrderController@getListOrder');
+Route::match(['GET','POST'], 'listOrder','App\Http\Controllers\OrderController@getListOrder' );
+Route::get('order/{order_id}','App\Http\Controllers\OrderController@orderDetail');
 
