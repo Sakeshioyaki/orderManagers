@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="main-card mb-3 card">
-                            <div class="card-body"><h5 class="card-title">Thông tin chi tiết của order</h5>
+                            <div class="card-body"><h5 class="card-title">Thông tin chi tiết của </h5>
                                 @if ($detail->count() == 0)
                                     <div><h3 class="text-center red">{{ 'Không tìm thấy bản ghi nào.' }}</h3></div>
                                 @else

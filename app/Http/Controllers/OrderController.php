@@ -21,7 +21,7 @@ class OrderController extends Controller
 			'last_name' => $request->get('lastName'),
 			'status' => 1,
 			'total' => 0,
-			'created_at' => date('Y-m-d'),
+			'created_at' => now('Asia/Ho_Chi_Minh'),
 		]);
 		
 		foreach ($request->get('items') as $item){
